@@ -1,113 +1,107 @@
 #!/usr/bin/env python3
 
-from contact import Contact
+from contact import Account
 
-def create_contact(fname,lname,phone,email):
+def create_account(name,password):
     '''
-    Function to create a new contact
+    Function to create a new account
     '''
-    new_contact = Contact(fname,lname,phone,email)
-    return new_contact
+    new_account = Account(name,password)
+    return new_account
 
-def save_contacts(contact):
+def save_accounts(account):
     '''
-    Function to save contact
+    Function to save account
     '''
-    contact.save_contact()
+    account.save_account()
 
-def del_contact(contact):
+def del_account(account):
     '''
-    Function to delete a contact
+    Function to delete a account
     '''
-    contact.delete_contact()
+    account.delete_account()
 
-def find_contact(number):
+def find_account(name):
     '''
-    Function that finds a contact by number and returns the contact
+    Function that finds a account by name and returns the account
     '''
-    return Contact.find_by_number(number)
+    return Account.find_by_name(name)
 
-def check_existing_contacts(number):
+def check_existing_accounts(name):
     '''
-    Function that check if a contact exists with that number and return a Boolean
+    Function that check if a contact exists with that name and return a Boolean
     '''
-    return Contact.contact_exist(number)
+    return Account.account_exist(name)
 
-def display_contacts():
+def display_accounts():
     '''
-    Function that returns all the saved contacts
+    Function that returns all the saved accounts
     '''
-    return Contact.display_contacts()
+    return Account.display_accounts()
 
-def check_copy_email(number):
+def check_copy_password(name):
     '''
-    method that copies returned contact's email to clipboard
+    method that copies returned account's password to clipboard
     '''
-    Contact.copy_email(number)
+    Account.copy_password(name)
 
 def main():
-    print("Hello Welcome to your contact list. What is your name?")
+    print("Hello Welcome to your Password locker. What is your name?")
     user_name = input()
 
     print(f"Hello {user_name}. what would you like to do?")
     print('\n')
 
     while True:
-            print("Use these short codes : cc - create a new contact, dc - display contacts, fc -find a contact, ex -exit the contact list ")
+            print("Use these short codes : cc - create a new account, dc - display accounts, fc -find an account, ex -exit the account list ")
 
             short_code = input().lower()
 
             if short_code == 'cc':
-                    print("New Contact")
+                    print("New Account")
                     print("-"*10)
 
-                    print ("First name ....")
-                    f_name = input()
+                    print ("Account Name ....")
+                    name = input()
 
-                    print("Last name ...")
-                    l_name = input()
+                    print("Password ...")
+                    password = input()
 
-                    print("Phone number ...")
-                    p_number = input()
-
-                    print("Email address ...")
-                    e_address = input()
-
-
-                    save_contacts(create_contact(f_name,l_name,p_number,e_address)) # create and save new contact.
+    
+                    save_accounts(create_account(name,password)) # create and save new account.
                     print ('\n')
-                    print(f"New Contact {f_name} {l_name} created")
+                    print(f"New Account {name} created")
                     print ('\n')
 
             elif short_code == 'dc':
 
-                    if display_contacts():
-                            print("Here is a list of all your contacts")
+                    if display_accounts():
+                            print("Here is a list of all your accounts")
                             print('\n')
 
-                            for contact in display_contacts():
-                                    print(f"{contact.first_name} {contact.last_name} .....{contact.phone_number}")
+                            for account in display_accounts():
+                                    print(f"{account.name} {account.password}")
 
                             print('\n')
                     else:
                             print('\n')
-                            print("You dont seem to have any contacts saved yet")
+                            print("You dont seem to have any accounts saved yet")
                             print('\n')
 
             elif short_code == 'fc':
 
-                    print("Enter the number you want to search for")
+                    print("Enter the name you want to search for")
 
-                    search_number = input()
-                    if check_existing_contacts(search_number):
-                            search_contact = find_contact(search_number)
-                            print(f"{search_contact.first_name} {search_contact.last_name}")
+                    search_name = input()
+                    if check_existing_accounts(search_name):
+                            search_account = find_account(search_name)
+                            print(f"{search_account.name}")
                             print('-' * 20)
 
-                            print(f"Phone number.......{search_contact.phone_number}")
-                            print(f"Email address.......{search_contact.email}")
+                            print(f"name.......{search_account.name}")
+                            
                     else:
-                            print("That contact does not exist")
+                            print("That account does not exist")
 
             elif short_code == "ex":
                     print("Bye .......")

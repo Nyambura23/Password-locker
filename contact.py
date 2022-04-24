@@ -1,53 +1,52 @@
 import pyperclip
 
-class Contact:
+class Account:
     """
-    Class that generates new instances of contacts.
+    Class that generates new instances of accounts.
     """
 
-    contact_list = [] # Empty contact list
+    account_list = [] # Empty account list
 
-    def __init__(self,first_name,last_name,phone_number,email):
+    def __init__(self,name, password):
 
       # docstring removed for simplicity
 
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone_number = phone_number
-        self.email = email 
+        self.name = name
+        self.password = password
+       
 
-    def save_contact(self):
-
-        '''
-        save_contact method saves contact objects into contact_list
-        '''
-
-        Contact.contact_list.append(self)
-
-    def delete_contact(self):
+    def save_account(self):
 
         '''
-        delete_contact method deletes a saved contact from the contact_list
+        save_account method saves account objects into account_list
         '''
 
-        Contact.contact_list.remove(self)
+        Account.account_list.append(self)
+
+    def delete_account(self):
+
+        '''
+        delete_account method deletes a saved account from the account_list
+        '''
+
+        Account.account_list.remove(self)
 
     @classmethod
-    def find_by_number(cls,number):
+    def find_by_name(cls,name):
         '''
-        Method that takes in a number and returns a contact that matches that number.
+        Method that takes in a name and returns an account that matches that name.
 
         Args:
-            number: Phone number to search for
+            name: name to search for
         Returns :
-            Contact of person that matches the number.
+            Account of person that matches the name.
         '''
 
-        for contact in cls.contact_list:
-            if contact.phone_number == number:
-                return contact
+        for account in cls.account_list:
+            if account.phone_name == name:
+                return account
 
-    def contact_exist(cls,number):
+    def account_exist(cls,name):
         '''
         Method that checks if a contact exists from the contact list.
         Args:
@@ -55,22 +54,22 @@ class Contact:
         Returns :
             Boolean: True or false depending if the contact exists
         '''
-        for contact in cls.contact_list:
-            if contact.phone_number == number:
+        for account in cls.account_list:
+            if account.name == name:
                     return True
 
         return False
 
 
     @classmethod
-    def display_contacts(cls):
+    def display_accounts(cls):
         '''
-        method that returns the contact list
+        method that returns the account list
         '''
-        return cls.contact_list
+        return cls.account_list
 
     @classmethod
-    def copy_email(cls,number):
-        contact_found = Contact.find_by_number(number)
-        pyperclip.copy(contact_found.email)
+    def copy_password(cls,name):
+        account_found = Account.find_by_name(name)
+        pyperclip.copy(account_found.password)
 
