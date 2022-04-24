@@ -38,14 +38,14 @@ class TestContact(unittest.TestCase):
         self.assertEqual(len(Contact.contact_list),1)
 
     def test_save_multiple_contact(self):
-            '''
-            test_save_multiple_contact to check if we can save multiple contact
-            objects to our contact_list
-            '''
-            self.new_contact.save_contact()
-            test_contact = Contact("Test","user","0712345678","test@user.com") # new contact
-            test_contact.save_contact()
-            self.assertEqual(len(Contact.contact_list),2)
+          '''
+          test_save_multiple_contact to check if we can save multiple contact
+          objects to our contact_list
+          '''
+          self.new_contact.save_contact()
+          test_contact = Contact("Test","user","0712345678","test@user.com") # new contact
+          test_contact.save_contact()
+          self.assertEqual(len(Contact.contact_list),2)
    
     def tearDown(self):
             '''
@@ -101,7 +101,12 @@ def test_contact_exists(self):
 
         self.assertTrue(contact_exists)
 
+def test_display_all_contacts(self):
+        '''
+        method that returns a list of all contacts saved
+        '''
 
-        
+        self.assertEqual(Contact.display_contacts(),Contact.contact_list)
+
 if __name__ == '__main__':
     unittest.main()
