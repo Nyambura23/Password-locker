@@ -1,5 +1,5 @@
 import unittest # Importing the unittest module
-from contact import Account # Importing the account class
+from contact import Account, Contact # Importing the account class
 import pyperclip
 
 class TestAccount(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestAccount(unittest.TestCase):
         '''
         Set up method to run before each test cases.
         '''
-        self.new_account = Account("Mary","Jane1") # create account object
+        self.new_account = Account("Mary","1234") # create account object
 
 
     def test_init(self):
@@ -26,7 +26,7 @@ class TestAccount(unittest.TestCase):
         '''
 
         self.assertEqual(self.new_account.name,"Mary")
-        self.assertEqual(self.new_account.password,"Jane1")
+        self.assertEqual(self.new_account.password,"1234")
         
 
     def test_save_user(self):
@@ -69,24 +69,24 @@ class TestAccount(unittest.TestCase):
             test_delete_account to test if we can remove an account from our account list
             '''
             self.new_account.save_account()
-            test_account = Account("Test","user") # new account
+            test_account = Account("Test","user","0712345678") # new account
             test_account.save_account()
 
             self.new_account.delete_account()# Deleting an account object
             self.assertEqual(len(Account.account_list),1)
 
-    def test_find_contact_by_name(self):
+    def test_find_contact_by_number(self):
         '''
-        test to check if we can find a contact by name and display information
+        test to check if we can find an account by number and display information
         '''
 
         self.new_account.save_account()
-        test_account = Account("Test","user") # new account
+        test_account = Account("Test","user","0712345678") # new account
         test_account.save_account()
 
-        found_account = Account.find_by_name("Test")
+        found_account = Account.find_by_number("0712345678")
 
-        self.assertEqual(found_account.name,test_account.name)
+        self.assertEqual(found_account.number,test_account.number)
 
 def test_account_exists(self):
         '''
@@ -94,7 +94,7 @@ def test_account_exists(self):
         '''
 
         self.new_account.save_account()
-        test_account = Account("Test","user") # new account
+        test_account = Account("Test","user","0712345678") # new account
         test_account.save_account()
 
         account_exists = Account.account_exist("Test")
@@ -114,9 +114,9 @@ def test_copy_password(self):
         '''
 
         self.new_account.save_account()
-        Account.copy_password("")
+        Account.copy_password("user")
 
-        self.assertEqual(self.new_contact.password,pyperclip.paste())
+        self.assertEqual(self.new_account.password,pyperclip.paste())
 
 if __name__ == '__main__':
     unittest.main()
