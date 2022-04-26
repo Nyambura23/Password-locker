@@ -121,135 +121,49 @@ def main():
             if find_user(loginPassword):
                 print('\n')
                 print("You can either create mutiple account (CA) or view existing accounts (VA)")
-                
-            
-    
-# def main():
-#     print('Hi.Welcome to Password Locker.')
-#     print('\n')
-#     print('Select the short_cord to navigate through:')
-#     print('\n')
-#     print('to create new user use "NU":')
-#     print('\n')
-#     print('to login use "LG" or "Ex" to exit')
-#     print('\n')
-#     print('to delete Account use "DU"')
-#     short_code = input().lower()
-#     if short_code == 'nu':
-#         print('Enter new account details')
-#         print('\n')
-#         username = input('Enter Username: ')
-#         while True:
-#             print('CP = to create password')
-#             password_choice = input().lower()
-#             if password_choice == 'cp':
-#                 password = input('Confirm Password: ')
-#                 print('\n')
-
-#             else:
-#                 print('Invalid password. Try again')
-#             save_users(create_user(username, password))
-
-#         print('\n')
-#         print(
-#             f'Welcome {username} to your account')
-#         print('\n')
-
-#     elif short_code == 'lg':
-#         print('Enter Your Account Username and Password to Login')
-#         username = input('Username:')
-#         password = input('Password:')
-#         check_user = find_user(username, password)
-#         if find_user == check_user:
-#             print(f'Welcome back {username}')
-#             print('\n')
-
-#         elif short_code == 'du':
-#             print('Are you sure want to delete Account??? If YES,type')
-#             username = input('Username :')
-#             password = input('Password:')
-#             check_user = find_user(username, password)
-#             if find_user == check_user:
-#                 print(f'Account {username} has been successfully deleted ')
-#                 print('\n')
-
-#             else:
-#                 print('Incorrect account name')
-#                 print('\n')
-
-
-#         elif short_code == 'ex':
-#             print('We are Sorry to see you leave!!!!')
-#             print('\n')
-
-#         else:
-#             print('Invalid Pasword. Try again!')
-#             print('\n')
-
-
-# def main():
-#     print("Hello Welcome to your Password locker. What is your name?")
-#     user_name = input()
-
-#     print(f"Hello {user_name}. what would you like to do?")
-#     print('\n')
-
-#     while True:
-#             print("Use these short codes : cc - create a new account, dc - display accounts, fc -find an account, ex -exit the account list ")
-
-#             short_code = input().lower()
-
-#             if short_code == 'cc':
-#                     print("New Account")
-#                     print("-"*10)
-
-#                     print ("Account Name ....")
-#                     name = input()
-
-#                     print("Password ...")
-#                     password = input()
-
-    
-#                     save_accounts(create_account(name,password)) # create and save new account.
-#                     print ('\n')
-#                     print(f"New Account {name} created")
-#                     print ('\n')
-
-#             elif short_code == 'dc':
-
-#                     if display_accounts():
-#                             print("Here is a list of all your accounts")
-#                             print('\n')
-
-#                             for account in display_accounts():
-#                                     print(f"{account.name} {account.password}")
-
-#                             print('\n')
-#                     else:
-#                             print('\n')
-#                             print("You dont seem to have any accounts saved yet")
-#                             print('\n')
-
-#             elif short_code == 'fc':
-
-#                     print("Enter the name you want to search for")
-
-#                     search_name = input()
-#                     if check_existing_accounts(search_name):
-#                             search_account = find_account(search_name)
-#                             print(f"{search_account.name}")
-#                             print('-' * 20)
-
-#                             print(f"name.......{search_account.name}")
-                            
-#                     else:
-#                             print("That account does not exist")
-
-#             elif short_code == "ex":
-#                     print("Bye .......")
-#                     break
-#             else:
-#                     print("I really didn't get that. Please use the short codes")
+                print('\n')
+                print("CA -or VA")
+                choose= input()
+                print('\n')
+                if choose == "CA":
+                    print("Add your account")
+                    print('\n')
+                    accountusername=loginUsername
+                    print("Account name")
+                    accountname=input()
+                    print('\n')
+                    print("Autogenerate password (A) or create custom password (C)")
+                    decision=input()
+                    if decision== "A":
+                        characters=string.ascii_letters+string.digits
+                        accountpassword="".join(random.choice(characters)for x in range(random.randint(6,16)))
+                        print(f"Password: {accountpassword}")
+                    elif decision== "C":
+                        print("Enter password")
+                        accountpassword=input()
+                    else:
+                        print("Kindly select a valid choice")
+                        save_accounts(create_account(accountname,accountusername,accountpassword))
+                        print('\n')
+                        print(f"Username: {accountusername} \nAccount Name: {accountname} \nPassword: {accountpassword}")
+                elif choose== "VA":
+                    if find_account(accountusername):
+                        print("Here are all your accounts:")
+                        print('\n')
+                        for user in display_accounts():
+                            print(f"Account: {user.accountname} \nPassword: {user.accountpassword} \n\n")
+                    else:
+                        print("Invalid credentials")
+                        print('\n')
+                else:
+                    print("Please try again")
+                    print('\n')
+            else:
+                print("The info you provided is not correct")
+                print('\n')
+        else:
+            print("Please select a valid option")
+            print('\n')
 
 if __name__ == '__main__':
     main()
