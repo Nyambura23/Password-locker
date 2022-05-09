@@ -1,5 +1,5 @@
 import unittest # Importing the unittest module
-from contact import Account, Contact # Importing the account class
+from contact import Account, User # Importing the account and user class
 import pyperclip
 
 class TestAccount(unittest.TestCase):

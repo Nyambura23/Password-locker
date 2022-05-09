@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-from optparse import Option
 import string
 import random
 from contact import User
@@ -12,7 +11,7 @@ def create_user(name,username,password):
     new_user = User(name,username,password)
     return new_user
 
-def save_users(user):
+def save_user(user):
     '''
     Function to save user
     '''
@@ -55,7 +54,7 @@ def create_account(accountname,accountusername,accountpassword):
     new_account = Credentials(accountname,accountusername,accountpassword)
     return new_account
 
-def save_accounts(account):
+def save_account(account):
     '''
     Function to save account
     '''
@@ -92,7 +91,7 @@ def check_copy_password(name):
     Credentials.copy_password(name)
 
 def main():
-    # while True:
+    while True:
         print ("Hi.Welcome to Password Locker,Select the short_cord to navigate through:.")
         print('\n')
         print('to create new user use "NU":')
@@ -106,7 +105,7 @@ def main():
             username=input()
             print("Enter your password...")
             password=input()
-            save_users(create_user(name,username,password))
+            save_user(create_user(name,username,password))
             print("Your account was succesfully created.Here are the details;")
             print('\n')
             print(f"Name: {name} \nUsername: {username} \nPassword {password}")
@@ -143,7 +142,7 @@ def main():
                         accountpassword=input()
                     else:
                         print("Kindly select a valid choice")
-                        save_accounts(create_account(accountname,accountusername,accountpassword))
+                        save_account(create_account(accountname,accountusername,accountpassword))
                         print('\n')
                         print(f"Username: {accountusername} \nAccount Name: {accountname} \nPassword: {accountpassword}")
                 elif choose== "VA":
